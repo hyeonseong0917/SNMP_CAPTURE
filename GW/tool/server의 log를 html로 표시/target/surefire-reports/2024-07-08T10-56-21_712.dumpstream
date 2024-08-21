@@ -1,0 +1,5 @@
+# Created at 2024-07-08T10:56:24.137
+Boot Manifest-JAR contains absolute paths in classpath 'E:\인턴\프로젝트 코드\GW layer\syslog capture code\Version 7\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

@@ -1,0 +1,25 @@
+#template 설정 방식 (1번 또는 2번의 방식으로 설정)
+
+1. $template logCaptureFormat,"<logCaptureTimeStamp>%timegenerated:1:10:date-rfc3339% %timegenerated:12:19:date-rfc3339%</logCaptureTimeStamp><logCaptureHostName>%HOSTNAME%</logCaptureHostName><logCaptureSyslogTag>%syslogtag%</logCaptureSyslogTag><logCaptureMsg>%msg%</logCaptureMsg><logCaptureSeverity>%syslogseverity-text%</logCaptureSeverity>"
+
+2. template(name="logCaptureFormat" type="string" string="<logCaptureTimeStamp>%timegenerated:1:10:date-rfc3339% %timegenerated:12:19:date-rfc3339%</logCaptureTimeStamp><logCaptureHostName>%HOSTNAME%</logCaptureHostName><logCaptureSyslogTag>%syslogtag%</logCaptureSyslogTag><logCaptureMsg>%msg%</logCaptureMsg><logCaptureSeverity>%syslogseverity-text%</logCaptureSeverity>")
+
+#로그를 수집할 ip 설정
+#ip = 로그를 수집할 서버의 ip 주소
+#port = 로그를 수집할 서버의 port 번호
+
+*.* @ip:port;logCaptureFormat
+
+TCP의 경우
+*.* @@192.168.0.7:8081
+
+UDP의 경우
+*.* @192.168.0.7:8081
+
+데이터 전송 형식 예제
+<logCaptureIP>/192.168.0.232</logCaptureIP>
+<logCaptureTimeStamp>2024-07-15 10:04:49</logCaptureTimeStamp>
+<logCaptureHostName>codej232</logCaptureHostName>
+<logCaptureSyslogTag>systemd[1]:</logCaptureSyslogTag>
+<logCaptureMsg>rabbitmq-server.service: Scheduled restart job, restart counter is at 32842.</logCaptureMsg>
+<logCaptureSeverity>info</logCaptureSeverity>

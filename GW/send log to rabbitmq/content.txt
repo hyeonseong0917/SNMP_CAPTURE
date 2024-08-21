@@ -1,0 +1,16 @@
+8081을 통해서 들어오는 모든 로그를 ip 정보와 함께 수신
+
+TCP의 경우
+*.* @@192.168.0.7:8081
+
+UDP의 경우
+*.* @192.168.0.7:8081
+
+local의 port를 막는 경우에 실시
+ausearch -c 'rs:main Q:Reg' --raw | audit2allow -M my-rsmainQReg
+
+semodule -i my-rsmainQReg.pp
+
+데이터 전송 형식 예제
+<logCaptureIP>/192.168.0.232:39446</logCaptureIP>
+<logCaptureTimeStamp>2024-07-15 10:04:49</logCaptureTimeStamp><logCaptureHostName>codej232</logCaptureHostName><logCaptureSyslogTag>systemd[1]:</logCaptureSyslogTag><logCaptureMsg>rabbitmq-server.service: Scheduled restart job, restart counter is at 32842.</logCaptureMsg><logCaptureSeverity>info</logCaptureSeverity>

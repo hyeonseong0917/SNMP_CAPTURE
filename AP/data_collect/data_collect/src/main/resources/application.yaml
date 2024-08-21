@@ -1,0 +1,30 @@
+server:
+  port: 8080
+#logging:
+#  level:
+#    root: DEBUG
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://192.168.0.222:5432/snmp
+    driver-class-name: org.postgresql.Driver
+    username: codej
+    password: zhemwpdl12!@
+  rabbitmq:
+    host: 192.168.0.231
+#    host: 192.168.0.11
+    port: 5672
+    username: codej
+#    username: guest
+    password: zhemwpdl12!@
+#    password: guest
+    listener:
+      simple:
+        concurrency: 5
+        max-concurrency: 10

@@ -1,0 +1,5 @@
+kr\co\syslog\capture\domain\SSHService.class
+kr\co\syslog\capture\SyslogCaptureApplication.class
+kr\co\syslog\capture\infrastructure\SSHClient.class
+kr\co\syslog\capture\presentation\SyslogController.class
+kr\co\syslog\capture\application\SSHServiceImpl.class

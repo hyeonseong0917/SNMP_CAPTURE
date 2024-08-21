@@ -1,0 +1,9 @@
+1. 새로운 대시보드 생성
+
+2. import a dashboard 선택
+
+3. grafana.json 파일 선택
+
+4. variable에서 dashboard_name과 uid 수정 (dashboard_name : 자신이 설정한 대시보드 이름, uid : 대시보드의 uid)
+ex) ~/d/ddu231vg7a8e8e/complete-4?orgId=1&refresh=auto
+      => dashboard_name = complete 4, uid = ddu231vg7a8e8e

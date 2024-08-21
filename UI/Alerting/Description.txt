@@ -1,0 +1,11 @@
+{{ range $k, $v := $values }}
+{{ if gt $v.Value 3.5 }}
+{{ $v.Labels }} : [하위 interface 오류 발생]
+{{ else if gt $v.Value 2.5 }}
+{{ $v.Labels }} : [interface 구성 요소 누락]
+{{ else if gt $v.Value 1.5 }}
+{{ $v.Labels }} : [interface 확인 불가]
+{{ else if gt $v.Value 0.5 }}
+{{ $v.Labels }} : [interface 문제 발생]
+{{ end }}
+{{ end }}

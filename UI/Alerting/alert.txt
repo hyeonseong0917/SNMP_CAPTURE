@@ -1,0 +1,18 @@
+SELECT
+  if_name,
+  CASE
+    WHEN admin_status = 1 AND oper_status = 2 THEN 1
+    WHEN admin_status = 1 AND oper_status = 4 THEN 2
+    WHEN admin_status = 1 AND oper_status = 6 THEN 3
+    WHEN admin_status = 1 AND oper_status = 7 THEN 4
+    ELSE 0 
+  END AS value
+FROM
+  tb_if_traffic_hist 
+WHERE
+  arrival_time = (
+    SELECT
+      MAX(arrival_time)
+    FROM
+      tb_if_traffic_hist
+  )

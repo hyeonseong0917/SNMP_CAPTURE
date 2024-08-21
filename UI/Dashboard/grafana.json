@@ -1,0 +1,1623 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 15,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 18,
+      "panels": [],
+      "title": "interface traffic",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "set",
+              "url": "/d/${uid}/${Dashboard_name}?var-ip_address=${ip_address}&var-selected_time=${__value.time:date}&var-interface=${interface}&from=${__from}&to=${__to}&var-log_num=${log_num}&var-severity=${severity}\r"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 100000000
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "out_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "in_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_in_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_out_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_total_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "timezone": [
+          "browser"
+        ],
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "with sub1 AS (\r\n\tSELECT\r\n\t\tDISTINCT if_name,\r\n\t\tin_packet AS total_in_traffic,\r\n\t\tout_packet AS total_out_traffic,\r\n\t\tin_error_packet AS total_in_error_traffic,\r\n\t\tout_error_packet AS total_out_error_traffic,\r\n\t\tarrival_time\r\n\tFROM\r\n\t\ttb_if_traffic_hist \r\n), sub2 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\ttotal_in_traffic,\r\n\t\ttotal_out_traffic,\r\n\t\ttotal_in_error_traffic,\r\n\t\ttotal_out_error_traffic,\r\n\t\tLAG(total_in_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_traffic,\r\n    LAG(total_out_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_traffic,\r\n    LAG(total_in_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_error_traffic,\r\n    LAG(total_out_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_error_traffic,\r\n   \tarrival_time\r\n   FROM\r\n   \tsub1\r\n   ORDER by\r\n   \tarrival_time\r\n), sub3 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\tCASE \r\n   \t\tWHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_traffic - prev_in_traffic < 0 THEN 2^32 - prev_in_traffic + total_in_traffic\r\n   \t\tELSE total_in_traffic - prev_in_traffic\r\n   \tEND AS diff_in_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_traffic - prev_out_traffic < 0 THEN 2^32 - prev_out_traffic + total_out_traffic\r\n   \t\tELSE total_out_traffic - prev_out_traffic\r\n   \tEND AS diff_out_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_error_traffic - prev_in_error_traffic < 0 THEN 2^32 - prev_in_error_traffic + total_in_error_traffic\r\n   \t\tELSE total_in_error_traffic - prev_in_error_traffic\r\n   \tEND AS diff_in_error_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_error_traffic - prev_out_error_traffic < 0 THEN 2^32 - prev_out_error_traffic + total_out_error_traffic\r\n   \t\tELSE total_out_error_traffic - prev_out_error_traffic\r\n   \tEND AS diff_out_error_traffic,\r\n    arrival_time\r\n   FROM\r\n\t\tsub2\r\n)\r\nSELECT\r\n  diff_in_traffic AS in_traffic, diff_out_traffic AS out_traffic, diff_in_traffic + diff_out_traffic AS total_traffic,\r\n  (arrival_time - INTERVAL '$time_interval') AS time\r\nFROM\r\n  sub3\r\nWHERE\r\n  if_name = '$interface'\r\nORDER BY\r\n  arrival_time DESC;\r\n\r\n-- with sub1 AS (\r\n-- \tSELECT\r\n-- \t\tDISTINCT if_name,\r\n-- \t\tin_packet,\r\n-- \t\tout_packet,\r\n-- \t\tin_error_packet,\r\n-- \t\tout_error_packet,\r\n-- \t\tarrival_time\r\n-- \tFROM\r\n-- \t\tif_traffic\r\n-- ), sub2 AS (\r\n-- \tSELECT\r\n-- \t\tif_name,\r\n-- \t\tSUM(in_packet) AS total_in_traffic,\r\n-- \t\tSUM(out_packet) AS total_out_traffic,\r\n-- \t\tSUM(in_error_packet) AS total_in_error_traffic,\r\n-- \t\tSUM(out_error_packet) AS total_out_error_traffic,\r\n-- \t\tarrival_time\r\n-- \tFROM\r\n-- \t\tsub1\r\n-- \tGROUP BY\r\n-- \t\tif_name, arrival_time\r\n-- ), sub3 AS (\r\n-- \tSELECT\r\n-- \t\tif_name,\r\n-- \t\ttotal_in_traffic,\r\n-- \t\ttotal_out_traffic,\r\n-- \t\ttotal_in_error_traffic,\r\n-- \t\ttotal_out_error_traffic,\r\n-- \t\tLAG(total_in_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_traffic,\r\n--     LAG(total_out_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_traffic,\r\n--     LAG(total_in_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_error_traffic,\r\n--     LAG(total_out_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_error_traffic,\r\n--    \tarrival_time\r\n--    FROM\r\n--    \tsub2\r\n--    ORDER by\r\n--    \tarrival_time\r\n-- ), sub4 AS (\r\n-- \tSELECT\r\n-- \t\tif_name,\r\n-- \t\tCASE \r\n--    \t\tWHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n-- \t\t\tWHEN total_in_traffic - prev_in_traffic <= 0 THEN total_in_traffic\r\n--    \t\tELSE total_in_traffic - prev_in_traffic\r\n--    \tEND AS diff_in_traffic,\r\n-- \t\tCASE \r\n--    \t\tWHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n-- \t\t\tWHEN total_out_traffic - prev_out_traffic <= 0 THEN total_out_traffic\r\n--    \t\tELSE total_out_traffic - prev_out_traffic\r\n--    \tEND AS diff_out_traffic,\r\n-- \t\tCASE \r\n--    \t\tWHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n-- \t\t\tWHEN total_in_error_traffic - prev_in_error_traffic <= 0 THEN total_in_error_traffic\r\n--    \t\tELSE total_in_error_traffic - prev_in_error_traffic\r\n--    \tEND AS diff_in_error_traffic,\r\n-- \t\tCASE \r\n--    \t\tWHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n-- \t\t\tWHEN total_out_error_traffic - prev_out_error_traffic <= 0 THEN total_out_error_traffic\r\n--    \t\tELSE total_out_error_traffic - prev_out_error_traffic\r\n--    \tEND AS diff_out_error_traffic,\r\n--     arrival_time\r\n--    FROM\r\n-- \t\tsub3\r\n-- )\r\n-- SELECT\r\n--   diff_in_traffic, diff_out_traffic, diff_in_traffic + diff_out_traffic AS diff_total_traffic,\r\n--   (arrival_time - INTERVAL '$time_interval') AS time\r\n-- FROM\r\n--   sub4\r\n-- WHERE\r\n--   if_name = '$interface'\r\n-- ORDER BY\r\n--   arrival_time DESC;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "timeFrom": "5m",
+      "title": "traffic",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 15,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "links": [
+            {
+              "title": "set",
+              "url": "/d/${uid}/${Dashboard_name}?var-ip_address=${ip_address}&var-selected_time=${__value.time:date}&var-interface=${interface}&from=${__from}&to=${__to}&var-log_num=${log_num}&var-severity=${severity}\r"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "out_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "in_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "in_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "out_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "total_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_in_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_out_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "diff_total_error_traffic"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "hideTimeOverride": true,
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "with sub1 AS (\r\n\tSELECT\r\n\t\tDISTINCT if_name,\r\n\t\tin_packet AS total_in_traffic,\r\n\t\tout_packet AS total_out_traffic,\r\n\t\tin_error_packet AS total_in_error_traffic,\r\n\t\tout_error_packet AS total_out_error_traffic,\r\n\t\tarrival_time\r\n\tFROM\r\n\t\ttb_if_traffic_hist \r\n), sub2 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\ttotal_in_traffic,\r\n\t\ttotal_out_traffic,\r\n\t\ttotal_in_error_traffic,\r\n\t\ttotal_out_error_traffic,\r\n\t\tLAG(total_in_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_traffic,\r\n    LAG(total_out_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_traffic,\r\n    LAG(total_in_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_error_traffic,\r\n    LAG(total_out_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_error_traffic,\r\n   \tarrival_time\r\n   FROM\r\n   \tsub1\r\n   ORDER by\r\n   \tarrival_time\r\n), sub3 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\tCASE \r\n   \t\tWHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_traffic - prev_in_traffic < 0 THEN 2^32 - prev_in_traffic + total_in_traffic\r\n   \t\tELSE total_in_traffic - prev_in_traffic\r\n   \tEND AS diff_in_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_traffic - prev_out_traffic < 0 THEN 2^32 - prev_out_traffic + total_out_traffic\r\n   \t\tELSE total_out_traffic - prev_out_traffic\r\n   \tEND AS diff_out_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_error_traffic - prev_in_error_traffic < 0 THEN 2^32 - prev_in_error_traffic + total_in_error_traffic\r\n   \t\tELSE total_in_error_traffic - prev_in_error_traffic\r\n   \tEND AS diff_in_error_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_error_traffic - prev_out_error_traffic < 0 THEN 2^32 - prev_out_error_traffic + total_out_error_traffic\r\n   \t\tELSE total_out_error_traffic - prev_out_error_traffic\r\n   \tEND AS diff_out_error_traffic,\r\n    arrival_time\r\n   FROM\r\n\t\tsub2\r\n)\r\nSELECT\r\n  diff_in_error_traffic AS in_error_traffic, diff_out_error_traffic AS out_error_traffic, diff_in_error_traffic + diff_out_error_traffic AS total_error_traffic,\r\n  (arrival_time - INTERVAL '$time_interval') AS time\r\nFROM\r\n  sub3\r\nWHERE\r\n  if_name = '$interface'\r\nORDER BY\r\n  arrival_time DESC;\r\n\r\n-- SELECT\r\n--   COALESCE(\r\n--     in_error_packet - LAG(in_error_packet) OVER (\r\n--       PARTITION BY if_name\r\n--       ORDER BY\r\n--         arrival_time\r\n--     ),\r\n--     0\r\n--   ) AS in_error_traffic,\r\n--   COALESCE(\r\n--     out_error_packet - LAG(out_error_packet) OVER (\r\n--       PARTITION BY if_name\r\n--       ORDER BY\r\n--         arrival_time\r\n--     ),\r\n--     0\r\n--   ) AS out_error_traffic,\r\n--   (\r\n--     COALESCE(\r\n--       in_error_packet - LAG(in_error_packet) OVER (\r\n--         PARTITION BY if_name\r\n--         ORDER BY\r\n--           arrival_time\r\n--       ),\r\n--       0\r\n--     ) + COALESCE(\r\n--       out_error_packet - LAG(out_error_packet) OVER (\r\n--         PARTITION BY if_name\r\n--         ORDER BY\r\n--           arrival_time\r\n--       ),\r\n--       0\r\n--     )\r\n--   ) AS total_error_traffic,\r\n--   (arrival_time - INTERVAL '$time_interval') AS time\r\n-- FROM\r\n--   (\r\n--     SELECT\r\n--       DISTINCT if_name,\r\n--       in_packet,\r\n--       out_packet,\r\n--       in_error_packet,\r\n--       out_error_packet,\r\n--       arrival_time\r\n--     FROM\r\n--       if_traffic\r\n--   ) AS sub\r\n-- WHERE\r\n--   if_name = '$interface'\r\n-- ORDER BY\r\n--   arrival_time DESC;\r\n\r\n\r\n-- SELECT\r\n--   (in_error_packet + out_error_packet) AS total_error_traffic,\r\n--   out_error_packet AS out_error_traffic,\r\n--   in_error_packet AS in_error_traffic,\r\n--   (arrival_time - INTERVAL '$time_interval') AS time\r\n-- FROM\r\n--   if_traffic\r\n-- WHERE\r\n--   if_name = '$interface'\r\n-- ORDER BY\r\n--   time DESC;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "timeFrom": "5m",
+      "title": "error traffic",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 17,
+      "panels": [],
+      "title": "interface information",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": true,
+          "mappings": [],
+          "max": 700000000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 350000000
+              },
+              {
+                "color": "red",
+                "value": 560000000
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 15
+      },
+      "id": 10,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^diff_total_traffic$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "with sub1 AS (\r\n\tSELECT\r\n\t\tDISTINCT if_name,\r\n\t\tin_packet AS total_in_traffic,\r\n\t\tout_packet AS total_out_traffic,\r\n\t\tin_error_packet AS total_in_error_traffic,\r\n\t\tout_error_packet AS total_out_error_traffic,\r\n\t\tarrival_time\r\n\tFROM\r\n\t\ttb_if_traffic_hist \r\n), sub2 AS (\r\n\tSELECT\r\n    \tif_name,\r\n\t    total_in_traffic,\r\n    \ttotal_out_traffic,\r\n        total_in_error_traffic,\r\n\t    total_out_error_traffic,\r\n    \tLAG(total_in_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_traffic,\r\n        LAG(total_out_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_traffic,\r\n        LAG(total_in_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_error_traffic,\r\n        LAG(total_out_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_error_traffic,\r\n   \t    arrival_time\r\n    FROM\r\n        sub1\r\n    ORDER by\r\n   \t    arrival_time\r\n), sub3 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\tCASE \r\n   \t\tWHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n\t\tWHEN total_in_traffic - prev_in_traffic < 0 THEN 2^32 - prev_in_traffic + total_in_traffic\r\n   \t\tELSE total_in_traffic - prev_in_traffic\r\n   \tEND AS diff_in_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n\t\tWHEN total_out_traffic - prev_out_traffic < 0 THEN 2^32 - prev_out_traffic + total_out_traffic\r\n   \t\tELSE total_out_traffic - prev_out_traffic\r\n   \tEND AS diff_out_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n\t\tWHEN total_in_error_traffic - prev_in_error_traffic < 0 THEN 2^32 - prev_in_error_traffic + total_in_error_traffic\r\n   \t\tELSE total_in_error_traffic - prev_in_error_traffic\r\n   \tEND AS diff_in_error_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n\t\tWHEN total_out_error_traffic - prev_out_error_traffic < 0 THEN 2^32 - prev_out_error_traffic + total_out_error_traffic\r\n   \t\tELSE total_out_error_traffic - prev_out_error_traffic\r\n   \tEND AS diff_out_error_traffic,\r\n    arrival_time\r\n    FROM\r\n\t\tsub2\r\n)\r\nSELECT\r\n    SUM(diff_in_traffic) + SUM(diff_out_traffic) AS diff_total_traffic\r\nFROM\r\n    sub3\r\nGROUP BY \r\n    arrival_time\r\nHAVING\r\n    arrival_time BETWEEN \r\n    (\r\n        COALESCE(\r\n        NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n        (SELECT MAX(arrival_time) FROM tb_if_traffic_hist)\r\n        ) - INTERVAL '${gap}'\r\n    )\r\n    AND \r\n    (\r\n        COALESCE(\r\n        NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n        (SELECT MAX(arrival_time) FROM tb_if_traffic_hist)\r\n        ) + INTERVAL '${gap}'\r\n    ) \r\n\r\n-- WITH sub1 AS (\r\n--     SELECT \r\n--         DISTINCT if_name,\r\n--         in_packet,\r\n--         out_packet,\r\n--         in_error_packet,\r\n--         out_error_packet,\r\n--         arrival_time\r\n--     FROM\r\n--         if_traffic\r\n-- ),\r\n-- sub2 AS (\r\n--     SELECT\r\n--         SUM(in_packet) AS total_in_traffic,\r\n--         SUM(out_packet) AS total_out_traffic,\r\n--         SUM(in_error_packet) AS total_in_error_traffic,\r\n--         SUM(out_error_packet) AS total_out_error_traffic,\r\n--         arrival_time\r\n--     FROM\r\n--         sub1\r\n--     GROUP BY\r\n--         arrival_time\r\n-- ),\r\n-- sub3 AS (\r\n--     SELECT\r\n--         total_in_traffic,\r\n--         total_out_traffic,\r\n--         total_in_error_traffic,\r\n--         total_out_error_traffic,\r\n--         LAG(total_in_traffic) OVER (ORDER BY arrival_time) AS prev_in_traffic,\r\n--         LAG(total_out_traffic) OVER (ORDER BY arrival_time) AS prev_out_traffic,\r\n--         LAG(total_in_error_traffic) OVER (ORDER BY arrival_time) AS prev_in_error_traffic,\r\n--         LAG(total_out_error_traffic) OVER (ORDER BY arrival_time) AS prev_out_error_traffic,\r\n--         arrival_time\r\n--     FROM\r\n--         sub2\r\n-- ),\r\n-- sub4 AS (\r\n--     SELECT\r\n--         CASE \r\n--             WHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n--             WHEN total_in_traffic - prev_in_traffic < 0 THEN total_in_traffic\r\n--             ELSE total_in_traffic - prev_in_traffic\r\n--         END AS diff_in_traffic,\r\n--         CASE \r\n--             WHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n--             WHEN total_out_traffic - prev_out_traffic < 0 THEN total_out_traffic\r\n--             ELSE total_out_traffic - prev_out_traffic\r\n--         END AS diff_out_traffic,\r\n--         CASE \r\n--             WHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n--             WHEN total_in_error_traffic - prev_in_error_traffic < 0 THEN total_in_error_traffic\r\n--             ELSE total_in_error_traffic - prev_in_error_traffic\r\n--         END AS diff_in_error_traffic,\r\n--             CASE \r\n--             WHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n--             WHEN total_out_error_traffic - prev_out_error_traffic < 0 THEN total_out_error_traffic\r\n--             ELSE total_out_error_traffic - prev_out_error_traffic\r\n--         END AS diff_out_error_traffic,\r\n--         arrival_time\r\n--     FROM\r\n--         sub3\r\n-- )\r\n-- SELECT\r\n--     diff_in_traffic + diff_out_traffic AS diff_total_traffic\r\n-- FROM\r\n--     sub4\r\n-- WHERE\r\n--     arrival_time BETWEEN \r\n--     (\r\n--         COALESCE(\r\n--         NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--         (SELECT MAX(arrival_time) FROM if_traffic)\r\n--         ) - INTERVAL '${gap}'\r\n--     )\r\n--     AND \r\n--     (\r\n--         COALESCE(\r\n--         NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--         (SELECT MAX(arrival_time) FROM if_traffic)\r\n--         ) + INTERVAL '${gap}'\r\n--     ) \r\n\r\n-- WITH sub1 AS (\r\n--     SELECT DISTINCT\r\n--         if_name,\r\n--         in_packet,\r\n--         out_packet,\r\n--         in_error_packet,\r\n--         out_error_packet,\r\n--         arrival_time\r\n--     FROM\r\n--         if_traffic\r\n-- ),\r\n-- sub2 AS (\r\n--     SELECT\r\n--         SUM(in_packet) AS total_in_traffic,\r\n--         SUM(out_packet) AS total_out_traffic,\r\n--         (SUM(in_packet) + SUM(out_packet)) AS total_traffic,\r\n--         SUM(in_error_packet) AS total_in_error_traffic,\r\n--         SUM(out_error_packet) AS total_out_error_traffic,\r\n--         (SUM(in_error_packet) + SUM(out_error_packet)) AS total_error_traffic,\r\n--         arrival_time\r\n--     FROM\r\n--         sub1\r\n--     GROUP BY\r\n--         arrival_time\r\n-- ),\r\n-- sub3 AS (\r\n--     SELECT\r\n--         total_in_traffic,\r\n--         total_out_traffic,\r\n--         total_traffic,\r\n--         total_in_error_traffic,\r\n--         total_out_error_traffic,\r\n--         total_error_traffic,\r\n--         arrival_time,\r\n--         LAG(total_in_traffic) OVER (ORDER BY arrival_time) AS prev_in_traffic,\r\n--         LAG(total_out_traffic) OVER (ORDER BY arrival_time) AS prev_out_traffic,\r\n--         LAG(total_traffic) OVER (ORDER BY arrival_time) AS prev_total_traffic,\r\n--         LAG(total_in_error_traffic) OVER (ORDER BY arrival_time) AS prev_in_error_traffic,\r\n--         LAG(total_out_error_traffic) OVER (ORDER BY arrival_time) AS prev_out_error_traffic,\r\n--         LAG(total_error_traffic) OVER (ORDER BY arrival_time) AS prev_total_error_traffic\r\n--     FROM\r\n--         sub2\r\n-- ),\r\n-- sub4 AS (\r\n--     SELECT\r\n--         GREATEST(total_in_traffic - prev_in_traffic, 0) AS diff_in_traffic,\r\n--         GREATEST(total_out_traffic - prev_out_traffic, 0) AS diff_out_traffic,\r\n--         GREATEST(total_traffic - prev_total_traffic, 0) AS diff_total_traffic,\r\n--         GREATEST(total_in_error_traffic - prev_in_error_traffic, 0) AS diff_in_error_traffic,\r\n--         GREATEST(total_out_error_traffic - prev_out_error_traffic, 0) AS diff_out_error_traffic,\r\n--         GREATEST(total_error_traffic - prev_total_error_traffic, 0) AS diff_total_error_traffic,\r\n--         arrival_time\r\n--     FROM\r\n--         sub3\r\n--     WHERE\r\n--         arrival_time BETWEEN \r\n--         (\r\n--             COALESCE(\r\n--             NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--             (SELECT MAX(arrival_time) FROM if_traffic)\r\n--             ) - INTERVAL '${gap}'\r\n--         )\r\n--         AND \r\n--         (\r\n--             COALESCE(\r\n--             NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--             (SELECT MAX(arrival_time) FROM if_traffic)\r\n--             ) + INTERVAL '${gap}'\r\n--         ) \r\n-- )\r\n-- SELECT\r\n--     diff_out_traffic\r\n-- FROM\r\n--     sub4\r\n\r\n  \r\n  -- SELECT\r\n  --   (SUM(in_packet) + SUM(out_packet)) AS total_traffic\r\n  -- FROM\r\n  --   (\r\n  --     SELECT\r\n  --       sum(in_packet) AS total_in_traffic, sum(out_packet) AS total_out_traffic, \r\n  --       (sum(in_packet) + sum(out_packet)) AS total_traffic,\r\n  --       sum(in_error_packet) AS total_in_error_traffic, sum(out_error_packet) AS total_out_error_traffic, \r\n  --       (sum(in_error_packet) + sum(out_error_packet)) AS total_error_traffic,\r\n  --       arrival_time\r\n  --     FROM \r\n  --       (\r\n  --         SELECT\r\n  --           DISTINCT if_name, in_packet, out_packet, in_error_packet, out_error_packet, arrival_time\r\n  --         FROM\r\n  --           if_traffic\r\n  --       ) AS sub1\r\n  --     GROUP BY arrival_time\r\n  --   ) AS sub2\r\n  -- WHERE\r\n  --   arrival_time BETWEEN \r\n  --   (\r\n  --     COALESCE(\r\n  --       NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n  --       (SELECT MAX(arrival_time) FROM if_traffic)\r\n  --     ) - INTERVAL '${gap}'\r\n  --   )\r\n  --   AND \r\n  --   (\r\n  --     COALESCE(\r\n  --       NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n  --       (SELECT MAX(arrival_time) FROM if_traffic)\r\n  --     ) + INTERVAL '${gap}'\r\n  --   )",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "AP traffic",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "#EAB839",
+                "value": 500
+              },
+              {
+                "color": "red",
+                "value": 800
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 5,
+        "y": 15
+      },
+      "id": 15,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^diff_total_error_traffic$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "hide": false,
+          "rawQuery": true,
+          "rawSql": "with sub1 AS (\r\n\tSELECT\r\n\t\tDISTINCT if_name,\r\n\t\tin_packet AS total_in_traffic,\r\n\t\tout_packet AS total_out_traffic,\r\n\t\tin_error_packet AS total_in_error_traffic,\r\n\t\tout_error_packet AS total_out_error_traffic,\r\n\t\tarrival_time\r\n\tFROM\r\n\t\ttb_if_traffic_hist \r\n), sub2 AS (\r\n\tSELECT\r\n    \tif_name,\r\n\t    total_in_traffic,\r\n    \ttotal_out_traffic,\r\n        total_in_error_traffic,\r\n\t    total_out_error_traffic,\r\n    \tLAG(total_in_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_traffic,\r\n        LAG(total_out_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_traffic,\r\n        LAG(total_in_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_in_error_traffic,\r\n        LAG(total_out_error_traffic) OVER (PARTITION BY if_name ORDER BY arrival_time) AS prev_out_error_traffic,\r\n   \t    arrival_time\r\n    FROM\r\n        sub1\r\n    ORDER by\r\n   \t    arrival_time\r\n), sub3 AS (\r\n\tSELECT\r\n\t\tif_name,\r\n\t\tCASE \r\n   \t\tWHEN total_in_traffic - prev_in_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_traffic - prev_in_traffic < 0 THEN 2^32 - prev_in_traffic + total_in_traffic\r\n   \t\tELSE total_in_traffic - prev_in_traffic\r\n   \tEND AS diff_in_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_traffic - prev_out_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_traffic - prev_out_traffic < 0 THEN 2^32 - prev_out_traffic + total_out_traffic\r\n   \t\tELSE total_out_traffic - prev_out_traffic\r\n   \tEND AS diff_out_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_in_error_traffic - prev_in_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_in_error_traffic - prev_in_error_traffic < 0 THEN 2^32 - prev_in_error_traffic + total_in_error_traffic\r\n   \t\tELSE total_in_error_traffic - prev_in_error_traffic\r\n   \tEND AS diff_in_error_traffic,\r\n\t\tCASE \r\n   \t\tWHEN total_out_error_traffic - prev_out_error_traffic IS NULL THEN 0\r\n\t\t\tWHEN total_out_error_traffic - prev_out_error_traffic < 0 THEN 2^32 - prev_out_error_traffic + total_out_error_traffic\r\n   \t\tELSE total_out_error_traffic - prev_out_error_traffic\r\n   \tEND AS diff_out_error_traffic,\r\n    arrival_time\r\n   FROM\r\n\t\tsub2\r\n)\r\nSELECT\r\n    SUM(diff_in_error_traffic) + SUM(diff_out_error_traffic) AS diff_total_error_traffic\r\nFROM\r\n    sub3\r\nGROUP BY \r\n    arrival_time\r\nHAVING\r\n    arrival_time BETWEEN \r\n    (\r\n        COALESCE(\r\n        NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n        (SELECT MAX(arrival_time) FROM tb_if_traffic_hist)\r\n        ) - INTERVAL '${gap}'\r\n    )\r\n    AND \r\n    (\r\n        COALESCE(\r\n        NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n        (SELECT MAX(arrival_time) FROM tb_if_traffic_hist)\r\n        ) + INTERVAL '${gap}'\r\n    ) \r\n\r\n\r\n-- SELECT\r\n--   (SUM(in_error_packet) + SUM(out_error_packet)) AS total_error_traffic\r\n-- FROM\r\n--   (\r\n--     SELECT\r\n--       DISTINCT if_name, in_error_packet, out_error_packet\r\n--     FROM\r\n--       if_traffic\r\n--     WHERE\r\n--       arrival_time BETWEEN \r\n--       (\r\n--         COALESCE(\r\n--           NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--           (SELECT MAX(arrival_time) FROM if_traffic)\r\n--         ) - INTERVAL '${gap}'\r\n--       )\r\n--       AND \r\n--       (\r\n--         COALESCE(\r\n--           NULLIF('${selected_time}', '')::timestamp + INTERVAL '${time_interval}',\r\n--           (SELECT MAX(arrival_time) FROM if_traffic)\r\n--         ) + INTERVAL '${gap}'\r\n--       )\r\n--   ) AS subquery;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "AP error traffic",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "description": "현재 interface로 연결되어 있는 ip list",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 10,
+        "y": 15
+      },
+      "id": 6,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  ip.ip_address\r\nFROM\r\n  tb_if_ip_mapping_mst ip\r\n  JOIN tb_if_traffic_hist it ON ip.if_name = it.if_name\r\nWHERE\r\n  it.if_name = '$interface'\r\n  AND ip.arrival_time BETWEEN (\r\n    COALESCE(\r\n      (\r\n        NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval'\r\n      ),\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) - INTERVAL '$gap'\r\n  )\r\n  AND (\r\n    COALESCE(\r\n      (\r\n        NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval'\r\n      ),\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) + INTERVAL '$gap'\r\n  )\r\n  AND ip.arrival_time BETWEEN it.arrival_time - INTERVAL '$gap'\r\n  AND it.arrival_time + INTERVAL '$gap'\r\nORDER BY\r\n  ip.ip_address;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "ip",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 16,
+        "y": 15
+      },
+      "id": 8,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"font-size: 1.5em; text-align: center; font-weight: bold;\">\r\n        Admin Status\r\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "11.1.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 4,
+        "x": 20,
+        "y": 15
+      },
+      "id": 9,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"font-size: 1.5em; text-align: center; font-weight: bold;\">\nOper Status\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "11.1.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "description": "관리자가 설정한 interface의 상태",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "activate"
+                },
+                "2": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "deactivate"
+                },
+                "3": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "testing"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 16,
+        "y": 17
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^admin_status$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  admin_status\r\nFROM\r\n  tb_if_traffic_hist\r\nWHERE\r\n  if_name = '$interface'\r\n  AND arrival_time BETWEEN (\r\n    COALESCE(\r\n      NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval',\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) - INTERVAL '$gap'\r\n  )\r\n  AND (\r\n    COALESCE(\r\n      NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval',\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) + INTERVAL '$gap'\r\n  )",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "description": "현재 interface의 상태",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "activate"
+                },
+                "2": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "deactivate"
+                },
+                "3": {
+                  "color": "yellow",
+                  "index": 2,
+                  "text": "testing"
+                },
+                "4": {
+                  "color": "#ffffff",
+                  "index": 3,
+                  "text": "unknown"
+                },
+                "5": {
+                  "color": "blue",
+                  "index": 4,
+                  "text": "dormant"
+                },
+                "6": {
+                  "color": "super-light-red",
+                  "index": 5,
+                  "text": "notPresent"
+                },
+                "7": {
+                  "color": "dark-red",
+                  "index": 6,
+                  "text": "lowerLayerDown"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 20,
+        "y": 17
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "percentChangeColorMode": "same_as_value",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/^oper_status$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  oper_status\r\nFROM\r\n  tb_if_traffic_hist\r\nWHERE\r\n  if_name = '$interface'\r\n  AND arrival_time BETWEEN (\r\n    COALESCE(\r\n      NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval',\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) - INTERVAL '$gap'\r\n  )\r\n  AND (\r\n    COALESCE(\r\n      NULLIF('${selected_time}', '') :: timestamp + INTERVAL '$time_interval',\r\n      (\r\n        SELECT\r\n          MAX(arrival_time)\r\n        FROM\r\n          tb_if_traffic_hist\r\n        WHERE\r\n          if_name = '$interface'\r\n      )\r\n    ) + INTERVAL '$gap'\r\n  )",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 16,
+      "panels": [],
+      "title": "log",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "description": "AP에 연결되어 있는 ip",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "links": [
+            {
+              "title": "View logs for ${__value.raw}",
+              "url": "/d/${uid}/${Dashboard_name}?var-ip_address=${__value.raw}&var-selected_time=${selected_time}&var-interface=${interface}&from=${__from}&to=${__to}&var-log_num=${log_num}&var-severity=${severity}\r"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "ip_address"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 176
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 0,
+        "y": 24
+      },
+      "id": 11,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "ip_address"
+          }
+        ]
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  ip_address\r\nFROM\r\n  tb_ip_status_mst\r\nWHERE\r\n  connection_status = 1;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "connected ip",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "grafana-postgresql-datasource",
+        "uid": "bdrb9n1r5a9kwe"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-text",
+              "wrapText": false
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "fieldMinMax": false,
+          "mappings": [
+            {
+              "options": {
+                "alert": {
+                  "color": "red",
+                  "index": 6
+                },
+                "crit": {
+                  "color": "semi-dark-red",
+                  "index": 5,
+                  "text": "critical"
+                },
+                "debug": {
+                  "color": "#f9fff8",
+                  "index": 0
+                },
+                "emerg": {
+                  "color": "#c4167d",
+                  "index": 7,
+                  "text": "emergency"
+                },
+                "err": {
+                  "color": "red",
+                  "index": 4,
+                  "text": "error"
+                },
+                "info": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "information"
+                },
+                "notice": {
+                  "color": "blue",
+                  "index": 2
+                },
+                "warning": {
+                  "color": "yellow",
+                  "index": 3
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 196
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "process_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 98
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "content"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 390
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "severity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "host_name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 111
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "process_name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 139
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "time"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "host_name"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "process_name"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "content"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 20,
+        "x": 4,
+        "y": 24
+      },
+      "id": 23,
+      "options": {
+        "cellHeight": "md",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.1.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-postgresql-datasource",
+            "uid": "bdrb9n1r5a9kwe"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\r\n  log_time - INTERVAL '$time_interval' AS time,\r\n  host_name, \r\n  process_name, \r\n  severity, \r\n  content\r\nFROM\r\n  tb_syslog_hist \r\nWHERE\r\n  ip_address = '$ip_address' AND \r\n  ('$severity' = 'all' OR severity = '$severity') AND\r\n  (log_time - INTERVAL '$time_interval') BETWEEN $__timeFrom() AND $__timeTo()\r\nLIMIT \r\n  COALESCE(CAST(NULLIF('$log_num', '') AS INTEGER), (SELECT COUNT(*) FROM syslog_table WHERE '$severity' = 'all' OR severity = '$severity'));\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [
+                  {
+                    "name": "*",
+                    "type": "functionParameter"
+                  }
+                ],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          },
+          "table": "syslog_table"
+        }
+      ],
+      "title": "Log Panel ($ip_address)",
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "apcli0",
+          "value": "apcli0"
+        },
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "bdrb9n1r5a9kwe"
+        },
+        "definition": "SELECT DISTINCT if_name FROM if_traffic ORDER BY if_name",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "interface",
+        "options": [],
+        "query": "SELECT DISTINCT if_name FROM if_traffic ORDER BY if_name",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 0,
+        "label": "selected_time",
+        "name": "selected_time",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "",
+          "value": ""
+        },
+        "hide": 2,
+        "label": "ip_address",
+        "name": "ip_address",
+        "options": [
+          {
+            "selected": true,
+            "text": "",
+            "value": ""
+          }
+        ],
+        "query": "",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "50",
+          "value": "50"
+        },
+        "hide": 0,
+        "label": "log number",
+        "name": "log_num",
+        "options": [
+          {
+            "selected": true,
+            "text": "50",
+            "value": "50"
+          }
+        ],
+        "query": "50",
+        "skipUrlSync": false,
+        "type": "textbox"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "all",
+          "value": "all"
+        },
+        "datasource": {
+          "type": "grafana-postgresql-datasource",
+          "uid": "bdrb9n1r5a9kwe"
+        },
+        "definition": "SELECT severity\nFROM severity_level\nORDER BY level DESC;",
+        "hide": 0,
+        "includeAll": false,
+        "label": "severity",
+        "multi": false,
+        "name": "severity",
+        "options": [],
+        "query": "SELECT severity\nFROM severity_level\nORDER BY level DESC;",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "hide": 2,
+        "name": "time_interval",
+        "query": "9 hours",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "gap",
+        "query": "2 second",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "대시보드 이름",
+        "hide": 2,
+        "name": "Dashboard_name",
+        "query": "complete-3",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "uid",
+        "query": "edtddb9rrqww0e",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "10s"
+    ]
+  },
+  "timezone": "browser",
+  "title": "Complete 3",
+  "uid": "edtddb9rrqww0e",
+  "version": 51,
+  "weekStart": ""
+}

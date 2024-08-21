@@ -1,0 +1,17 @@
+interface      : AP에 존재하는 interface 종류
+
+selected_time  : 특정 시간대를 확인하기 위한 변수
+
+ip_address     : 확인할 로그의 ip 주소
+
+log_num        : 패널에 표시되는 로그의 수 	
+
+severity       : 패널에 표시할 로그의 레벨
+
+time_interval  : DB에서 grafana로 가져올 때 생기는 시차
+
+gap            : 데이터를 수집할 때 발생하는 오차
+
+Dashboard_name : 대시보드의 이름
+
+uid            : 대시보드의 uid

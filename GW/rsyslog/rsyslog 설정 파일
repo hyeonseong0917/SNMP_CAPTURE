@@ -1,0 +1,29 @@
+1. 주석 해제 (없을 시 생성)
+module(load="imuxsock"    # provides support for local system logging (e.g. via logger command)
+       SysSock.Use="off") # Turn off message reception via local log socket;
+                          # local messages are retrieved through imjournal now.
+module(load="imjournal"             # provides access to the systemd journal
+       UsePid="system" # PID nummber is retrieved as the ID of the process the journal entry originates from
+       StateFile="imjournal.state") # File to store the position in the journal
+
+
+2. 타임스탬프의 형태 지정
+ : module(load="builtin:omfile" Template="RSYSLOG_TraditionalFileFormat")
+
+3. 전송할 로그의 형태를 다음과 같이 지정 (두 방법 중 하나를 선택)
+  1) template(name="logCaptureFormat" type="string" string="<logCaptureTimeStamp>%timegenerated:1:10:date-rfc3339% %timegenerated:12:19:date-rfc3339%</logCaptureTimeStamp><logCaptureHostName>%HOSTNAME%</logCaptureHostName><logCaptureSyslogTag>%syslogtag%</logCaptureSyslogTag><logCaptureMsg>%msg%</logCaptureMsg><logCaptureSeverity>%syslogseverity-text%</logCaptureSeverity>")
+  2) $template logCaptureFormat,"<logCaptureTimeStamp>%timegenerated:1:10:date-rfc3339% %timegenerated:12:19:date-rfc3339%</logCaptureTimeStamp><logCaptureHostName>%HOSTNAME%</logCaptureHostName><logCaptureSyslogTag>%syslogtag%</logCaptureSyslogTag><logCaptureMsg>%msg%</logCaptureMsg><logCaptureSeverity>%syslogseverity-text%</logCaptureSeverity>"
+
+
+4. 수집할 로그의 타입과 경로 지정 (수집하고 싶은 로그의 타입을 추가할 수 있다)
+*.info;  /var/log/messages    => info 이상의 로그를 messages에 저장
+mail.*   /var/log/maillog     => 메일에 관련된 모든 로그르 maillog에 저장
+*.emerg :omusrmsg:*           => 모든 사용자가 긴급 메시지를 받을 수 있도록 설정합니다
+
+5. 수집할 ip 주소 및 포트 입력
+ : *.* @"ip주소":"port번호";logCaptureFormat
+ex) *.* @192.168.0.5:514;logCaptureFormat
+
+
+6. rsyslog 재시작
+ : systemctl restart rsyslog
