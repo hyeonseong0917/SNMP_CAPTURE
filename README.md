@@ -62,7 +62,7 @@ systemctl start telegraf.service
 <br/>
 
 4. /etc/telegraf/telegraf.conf 파일 수정
-     https://github.com/codejone/NetAnalyze_2024/blob/main/GW/telegraf/telegraf.conf
+     https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/GW/telegraf/telegraf.conf
        
 telegraf.conf: output plugin와 inputs plugin 수정 필요
 ```
