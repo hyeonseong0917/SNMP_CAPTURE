@@ -1,10 +1,10 @@
 NetAnalyze_2024
 =====================
-AP에서 발생하는 트래픽의 데이터와 특정 기기들의 syslog를 수집하여 Grafana를 통하여 확인
+SNMP 프로토콜을 통해 AP에서 발생하는 트래픽의 데이터와 특정 기기들의 syslog를 수집하여 Grafana를 통하여 확인
 
 1. telegraf를 통하여 트래픽의 데이터를 수집
 2. rsyslog를 사용한 syslog 수집
-3. spring boot를 사용하여 수집한 데이터 저장
+3. spring boot와 멀티쓰레드를 사용해 수집한 데이터를 DB에 저장
 4. Grafana를 사용하여 저장된 데이터 확인
 <br/>
 
