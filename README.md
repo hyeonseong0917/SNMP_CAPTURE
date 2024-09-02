@@ -1,17 +1,35 @@
 NetAnalyze_2024
 =====================
 SNMP 프로토콜을 통해 공유기의 무선 액세스 포인트(AP)에서 발생하는 네트워크 트래픽 데이터를 수집하고, 특정 기기의 syslog를 함께 모은 후, 이를 Grafana에서 시각화하여 확인
-<br/>
+<br><br/>
 Back-End: 양현성
 <br/>
 Front-End: 배훈규
 <br/>
 1. Telegraf를 활용해 무선 액세스 포인트(AP)에서 트래픽 정보, 인터페이스 정보, 연결된 IP정보 등을 수집(B.E)
 2. rsyslog를 사용한 syslog 수집(F.E)
-3. spring boot와 JPA, 멀티쓰레드 큐를 이용해 수집한 데이터를 실시간으로 DB에 저장(B.E)
+3. Spring Boot와 JPA, 멀티쓰레드 큐를 이용해 수집한 데이터를 실시간으로 DB에 저장(B.E)
 4. Grafana를 사용하여 저장된 데이터 확인(F.E)
 <br><br/>
+### 전체 아키텍처
+<br><br/>
 ![img](./images/1.png)
+<br><br/>
+### 데이터 수집
+![img](./images/2.png)
+<br><br/>
+### AP 데이터 수집
+![img](./images/3.png)
+<br><br/>
+### AP 데이터 처리 및 저장
+![img](./images/4.png)
+<br><br/>
+### Grafana(F.E)
+![img](./images/5.png)
+<br><br/>
+### Transactional 격리
+![img](./images/6.png)
+<br><br/>
 
 # 1. module 설정
 - OS: CentOS 7
