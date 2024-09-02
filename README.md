@@ -12,7 +12,6 @@ Front-End: 배훈규
 4. Grafana를 사용하여 저장된 데이터 확인(F.E)
 <br><br/>
 ### 전체 아키텍처
-<br><br/>
 ![img](./images/1.png)
 <br><br/>
 ### 데이터 수집
