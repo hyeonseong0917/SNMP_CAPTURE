@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Builder
-//@Entity(name = "if_traffic")
 @Entity(name = "tb_if_traffic_hist")
 public class TrafficEntity {
     @Id

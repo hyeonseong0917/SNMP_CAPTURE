@@ -1,8 +1,5 @@
 server:
   port: 8080
-#logging:
-#  level:
-#    root: DEBUG
 spring:
   jpa:
     show-sql: true
@@ -18,12 +15,9 @@ spring:
     password: zhemwpdl12!@
   rabbitmq:
     host: 192.168.0.231
-#    host: 192.168.0.11
     port: 5672
     username: codej
-#    username: guest
     password: zhemwpdl12!@
-#    password: guest
     listener:
       simple:
         concurrency: 5

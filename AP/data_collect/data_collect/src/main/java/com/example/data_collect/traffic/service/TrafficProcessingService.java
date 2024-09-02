@@ -5,7 +5,6 @@ import com.example.data_collect.interfaceIndex.db.InterfaceIndexEntity;
 import com.example.data_collect.interfaceIndex.service.InterfaceIndexService;
 import com.example.data_collect.traffic.db.TrafficEntity;
 import com.example.data_collect.traffic.db.TrafficRepository;
-//import jakarta.transaction.Transactional;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ public class TrafficProcessingService {
     private TrafficRepository trafficRepository;
 
 
-//    @Transactional(isolation = Isolation.SERIALIZABLE)
     @Transactional
     public void processTrafficInfo(Map<String, Integer> fields, Map<String, String> tags, Integer timestampFields) {
         LocalDateTime localDateTime = getLocalDateTime(timestampFields);

@@ -66,7 +66,7 @@ public class MappingMessageService {
             Map<String, Object> map = objectMapper.readValue(line, Map.class); // 역직렬화
             Map<String, Object> fields = (Map<String, Object>) map.get("fields"); // fields
             Integer timestampFields = (Integer) map.get("timestamp"); // 시간
-            LocalDateTime localDateTime = getLocalDateTime(timestampFields);
+            LocalDateTime localDateTime = getLocalDateTime(timestampFields); // 큐에 메시지가 도착한 시간
             mappingService.processMappingInfo(fields, localDateTime); // db저장
         } catch (Exception e) {
             System.err.println("Error Occured in processActiveipLine");

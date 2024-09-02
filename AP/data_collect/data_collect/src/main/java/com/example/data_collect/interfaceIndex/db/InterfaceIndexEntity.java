@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Builder
-//@Entity(name="if_index")
 @Entity(name="tb_if_mst")
 public class InterfaceIndexEntity {
     @Id

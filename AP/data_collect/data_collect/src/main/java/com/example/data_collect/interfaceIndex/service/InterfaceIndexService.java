@@ -35,11 +35,6 @@ public class InterfaceIndexService {
                 .build();
     }
 
-//    @Transactional
-
-//    @Transactional(isolation = Isolation.SERIALIZABLE)
-
-//    @Transactional
     @Transactional(isolation = Isolation.REPEATABLE_READ)
     public void saveOrUpdate(InterfaceIndexEntity interfaceIndexEntity) {
         Optional<InterfaceIndexEntity> existingEntity = interfaceIndexRepository.findTopByIfName(interfaceIndexEntity.getIfName());

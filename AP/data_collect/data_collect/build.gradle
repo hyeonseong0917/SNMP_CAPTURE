@@ -24,10 +24,6 @@ repositories {
 }
 
 dependencies {
-//	// SLF4J API
-//	implementation 'org.slf4j:slf4j-api:1.7.32'
-//
-//	// Logback implementation of SLF4J
 	implementation 'ch.qos.logback:logback-classic:1.4.0'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'

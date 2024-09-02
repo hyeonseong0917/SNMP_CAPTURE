@@ -17,10 +17,6 @@ public class InterfaceIndexProcessingService {
     @Autowired
     private InterfaceIndexService interfaceIndexService;
 
-
-
-
-//    @Transactional(isolation = Isolation.SERIALIZABLE)
     @Transactional
     public void processInterfaceIndexInfo(Map<String, Integer> fields, Map<String, String> tags, Integer timestampFields){
         LocalDateTime localDateTime = getLocalDateTime(timestampFields);

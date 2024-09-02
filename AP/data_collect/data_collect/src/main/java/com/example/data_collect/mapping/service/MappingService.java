@@ -1,8 +1,8 @@
 package com.example.data_collect.mapping.service;
 
 import com.example.data_collect.common.FieldKey;
-import com.example.data_collect.currentstatus.db.CurrentStatusEntity;
-import com.example.data_collect.currentstatus.db.CurrentStatusRepository;
+//import com.example.data_collect.currentstatus.db.CurrentStatusEntity;
+//import com.example.data_collect.currentstatus.db.CurrentStatusRepository;
 import com.example.data_collect.interfaceIndex.db.InterfaceIndexEntity;
 import com.example.data_collect.interfaceIndex.db.InterfaceIndexId;
 import com.example.data_collect.interfaceIndex.db.InterfaceIndexRepository;
@@ -33,11 +33,7 @@ public class MappingService {
     private InterfaceIndexRepository interfaceIndexRepository;
     @Autowired
     private MappingRepository mappingRepository;
-    @Autowired
-    private CurrentStatusRepository currentStatusRepository;
 
-
-//    private static final String DIRECTORY = "C:\\timestamp";
 //    @Transactional
     public void processMappingInfo(Map<String, Object> fields, LocalDateTime localDateTime) {
         // 현재 작업 디렉토리의 위치를 가져옴
@@ -78,7 +74,7 @@ public class MappingService {
             System.err.println("ipAdEntIfIndex is Not In Fields.");
             return;
         }
-//
+
         try {
             if (Files.exists(filePath)) {
                 // 파일이 존재하면, 파일의 마지막 줄에 데이터 추가
@@ -96,7 +92,6 @@ public class MappingService {
         Optional<InterfaceIndexEntity> ifIndexOpt = interfaceIndexRepository.findTopByIfIndex((Integer) fields.get(FieldKey.IP_NET_TO_MEDIA_IF_INDEX.getKey()));
         if(!ifIndexOpt.isPresent()){
             try {
-                System.out.println("Waiting for 1 second because latestTime is less than 10 seconds greater than currentMessageTime.");
                 Thread.sleep(1000); // 1초 대기
             } catch (InterruptedException e) {
                 System.err.println("Thread was interrupted!");

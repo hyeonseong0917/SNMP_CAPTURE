@@ -1,7 +1,7 @@
 package com.example.data_collect.status.service;
 
-import com.example.data_collect.currentstatus.db.CurrentStatusEntity;
-import com.example.data_collect.currentstatus.db.CurrentStatusRepository;
+//import com.example.data_collect.currentstatus.db.CurrentStatusEntity;
+//import com.example.data_collect.currentstatus.db.CurrentStatusRepository;
 import com.example.data_collect.status.db.StatusEntity;
 import com.example.data_collect.status.db.StatusRepository;
 //import com.example.data_collect.status.model.StatusRequest;
@@ -32,9 +32,6 @@ public class StatusService {
     @Autowired
     private StatusRepository statusRepository;
 
-    @Autowired
-    private CurrentStatusRepository currentStatusRepository;
-
     private static final String DIRECTORY = "C:\\timestamp";
     private int cnt = 0;
     public void updateStatus(LocalDateTime localDateTime) {
@@ -52,7 +49,7 @@ public class StatusService {
         // 'timestamp' 디렉토리 경로 생성
         File timestampDir = new File(currentDirectory + File.separator + "active_ip");
         String fileName = localDateTime.format(formatter) + ".txt";
-//        Path filePath = Paths.get(DIRECTORY, fileName);
+
         Path filePath=Paths.get(timestampDir.getAbsolutePath(), fileName);
         try {
             if (Files.exists(filePath)) {
