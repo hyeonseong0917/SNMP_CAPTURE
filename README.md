@@ -36,7 +36,7 @@ Front-End: 배훈규
 - ipIfIndexQueue 흐름도
 <br><br/>
 ![img](./images/8.png)
-- *MappingMessageService Class - 메시지를 처리(역직렬화)하고 DB에 저장*: [MappingMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java)
+- **MappingMessageService Class - 메시지를 처리(역직렬화)하고 DB에 저장**: [MappingMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java)
 - MappingService Class - MappingEntity를 DB에 저장하고 {TIMESTAMP}.txt파일에 IP 정보 저장: [MappingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingService.java)
 - StatusUpdateService Class - {TIMESTAMP}.txt파일을 바탕으로 JPA Repository 갱신: [StatusService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/status/service/StatusService.java)
 <br><br/>
