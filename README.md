@@ -22,7 +22,7 @@ Front-End: 배훈규
 <br><br/>
 ### 데이터 수집
 ### code
-- telegraf 데이터 수집 코드: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/GW/telegraf/telegraf.conf
+- telegraf 데이터 수집 코드: [telegraf_code](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/GW/telegraf/telegraf.conf)
 ![img](./images/2.png)
 <br><br/>
 ### AP 데이터 수집
@@ -36,12 +36,16 @@ Front-End: 배훈규
 - ipIfIndexQueue 흐름도
 <br><br/>
 ![img](./images/8.png)
-- ipIfIndexQueue 데이터 처리 코드: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java
+- MappingMessageService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java
+- MappingService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingService.java
+- StatusUpdateService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/status/service/StatusService.java
 <br><br/>
 - ifTrafficQueue 흐름도
 <br><br/>
 ![img](./images/9.png)
-- ifTrafficQueue 데이터 처리 코드https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java
+- TrafficMessageService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java
+- TrafficProcessingService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficProcessingService.java
+- InterfaceIndexProcessingService.java: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/interfaceIndex/service/InterfaceIndexProcessingService.java
 <br><br/>
 
 <br><br/>
