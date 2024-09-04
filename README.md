@@ -25,6 +25,9 @@ Front-End: 배훈규
 ### 전체 아키텍처
 ![img](./images/1.png)
 <br><br/>
+### DB ERD
+[ERD](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/%EB%B3%B4%EA%B3%A0%EC%84%9C/ERD.png)
+<br><br/>
 ### 데이터 수집
 ### code
 - telegraf 데이터 수집 코드: [telegraf.conf](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/GW/telegraf/telegraf.conf)
