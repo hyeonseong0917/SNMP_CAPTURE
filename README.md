@@ -12,7 +12,7 @@ Front-End: 배훈규
 4. Grafana를 사용하여 저장된 데이터 확인(F.E)
 <br><br/>
 ### Why SNMP Protocol?
-- SNMP는 특정 OID(Object Identifier)를 통해 장비 내의 특정 자원이나 상태를 식별하고 데이터 수집이 가능
+- SNMP는 특정 OID(Object Identifier)를 통해 장비 내의 자원이나 상태를 식별하고 데이터를 수집할 수 있어, 이를 통해 실시간 네트워크 및 성능 모니터링이 가능
 <br><br/>
 ### What is Telegraf?
 ![img](./images/7.png)
