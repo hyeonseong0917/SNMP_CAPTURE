@@ -30,7 +30,11 @@ Front-End: 배훈규
 <br><br/>
 ### AP 데이터 처리 및 저장
 ### code
+- ipIfIndexQueue 흐름도
+![img](./images/8.png)
 - ipIfIndexQueue 데이터 처리 코드: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java
+- ifTrafficQueue 흐름도
+![img](./images/9.png)
 - ifTrafficQueue 데이터 처리 코드https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java
 ![img](./images/4.png)
 <br><br/>
