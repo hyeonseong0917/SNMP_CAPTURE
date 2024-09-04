@@ -65,7 +65,10 @@ Front-End: 배훈규
 ### Transactional 격리
 ![img](./images/6.png)
 <br><br/>
-
+### 단일 쓰레드 큐와 멀티 쓰레드 큐의 성능 차이
+![img](./images/10.png)
+<br><br/>
+** 약 6배의 처리 속도 개선 **
 <br><br/>
 # 1. module 설정
 - OS: CentOS 7
