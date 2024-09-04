@@ -39,7 +39,7 @@ Front-End: 배훈규
 - ipIfIndexQueue 데이터 처리 코드: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java
 <br><br/>
 - ifTrafficQueue 흐름도
-- <br><br/>
+<br><br/>
 ![img](./images/9.png)
 - ifTrafficQueue 데이터 처리 코드https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java
 <br><br/>
