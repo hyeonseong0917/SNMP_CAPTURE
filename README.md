@@ -21,8 +21,6 @@ Front-End: 배훈규
 ![img](./images/1.png)
 <br><br/>
 ### 데이터 수집
-![img](./images/4.png)
-<br><br/>
 ### code
 - telegraf 데이터 수집 코드: https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/GW/telegraf/telegraf.conf
 ![img](./images/2.png)
@@ -32,6 +30,8 @@ Front-End: 배훈규
 ![img](./images/3.png)
 <br><br/>
 ### AP 데이터 처리 및 저장
+![img](./images/2.png)
+<br><br/>
 ### code
 - ipIfIndexQueue 흐름도
 <br><br/>
