@@ -36,6 +36,9 @@ Front-End: 배훈규
 <br><br/>
 ![img](./images/3.png)
 <br><br/>
+### MultiThread Queue
+동적 쓰레드 풀을 활용한 멀티 쓰레드 큐 설정: [RabbitMqConfig.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/configuration/RabbitMqConfig.java)
+<br><br/>
 ### AP 데이터 처리 및 저장
 ![img](./images/4.png)
 <br><br/>
@@ -63,6 +66,7 @@ Front-End: 배훈규
 ![img](./images/6.png)
 <br><br/>
 
+<br><br/>
 # 1. module 설정
 - OS: CentOS 7
 ## 1.1 RabbitMQ
