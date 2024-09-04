@@ -36,16 +36,16 @@ Front-End: 배훈규
 - ipIfIndexQueue 흐름도
 <br><br/>
 ![img](./images/8.png)
-- MappingMessageService.java: [MappingMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java)
-- MappingService.java: [MappingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingService.java)
-- StatusUpdateService.java: [StatusUpdateService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/status/service/StatusService.java)
+- *MappingMessageService Class - 메시지를 처리(역직렬화)하고 DB에 저장*: [MappingMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingMessageService.java)
+- MappingService Class - MappingEntity를 DB에 저장하고 {TIMESTAMP}.txt파일에 IP 정보 저장: [MappingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/mapping/service/MappingService.java)
+- StatusUpdateService Class - {TIMESTAMP}.txt파일을 바탕으로 JPA Repository 갱신: [StatusService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/status/service/StatusService.java)
 <br><br/>
 - ifTrafficQueue 흐름도
 <br><br/>
 ![img](./images/9.png)
-- TrafficMessageService.java: [TrafficMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java)
-- TrafficProcessingService.java: [TrafficProcessingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficProcessingService.java)
-- InterfaceIndexProcessingService.java: [InterfaceIndexProcessingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/interfaceIndex/service/InterfaceIndexProcessingService.java)
+- TrafficMessageService Class - 메시지를 처리(역직렬화)하고 DB에 저장: [TrafficMessageService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficMessageService.java)
+- TrafficProcessingService Class - TrafficEntity를 DB에 저장: [TrafficProcessingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/traffic/service/TrafficProcessingService.java)
+- InterfaceIndexProcessingService Class - 인터페이스 인덱스와 인터페이스 설명을 DB에 저장: [InterfaceIndexProcessingService.java](https://github.com/hyeonseong0917/SNMP_CAPTURE/blob/main/AP/data_collect/data_collect/src/main/java/com/example/data_collect/interfaceIndex/service/InterfaceIndexProcessingService.java)
 <br><br/>
 
 <br><br/>
